@@ -106,7 +106,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
               </div>
               <div>
                 <span className="text-[10px] font-mono font-black text-slate-400 uppercase block">Global Coordinates</span>
-                <span className="text-xs font-bold text-slate-800">San Francisco virtual hub &bull; Global Distributed Architecture</span>
+                <span className="text-xs font-bold text-slate-800">Niketan, Marg Dillibazar Kathmandu, Nepal</span>
               </div>
             </div>
 
@@ -115,9 +115,9 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
                 <Mail className="w-4 h-4 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-[10px] font-mono font-black text-slate-400 uppercase block">Developer Mail</span>
-                <a href="mailto:architects@purpleclone.com" className="text-xs font-bold text-slate-800 underline hover:text-indigo-600">
-                  architects@purpleclone.com
+                <span className="text-[10px] font-mono font-black text-slate-400 uppercase block">Email</span>
+                <a href="mailto:mail@pctech.com.np" className="text-xs font-bold text-slate-800 underline hover:text-indigo-600">
+                  mail@pctech.com.np
                 </a>
               </div>
             </div>
@@ -127,8 +127,8 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
                 <Phone className="w-4 h-4 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-[10px] font-mono font-black text-slate-400 uppercase block">Enterprise Helpline</span>
-                <span className="text-xs font-bold text-slate-800">+1 (415) 555-CLON (2566)</span>
+                <span className="text-[10px] font-mono font-black text-slate-400 uppercase block">Phone</span>
+                <span className="text-xs font-bold text-slate-800">+977 9701011225</span>
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
           </div>
           <h4 className="text-sm font-bold uppercase font-display tracking-tight text-white">CRM Integration Active</h4>
           <p className="text-[11px] text-slate-400 font-medium leading-relaxed mt-1">
-            Submitting this form immediately routes details to our active CRM database. You can inspect the logs directly by logging into the Developer CRM view.
+            Submitting this form immediately routes details to our active CRM database. You can inspect the logs directly by logging into the Login view.
           </p>
         </div>
       </div>
@@ -165,7 +165,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
               </div>
               <h4 className="text-lg font-black text-slate-900 font-display uppercase">INQUIRY LOGGED SUCCESSFULLY!</h4>
               <p className="text-xs text-slate-700 font-medium max-w-md mx-auto leading-relaxed">
-                Your request has been indexed into our persistent Lead pipeline as a "New" ticket. You can authenticate into the Developer CRM tab to manage and update its status immediately!
+                Your request has been indexed into our persistent Lead pipeline as a "New" ticket. You can authenticate into the Login tab to manage and update its status immediately!
               </p>
               <button
                 type="button"

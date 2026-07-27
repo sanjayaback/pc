@@ -1,17 +1,18 @@
 # cPanel deployment guide
 
 ## 1. Upload these files/folders to your cPanel app root
-Upload the entire project folder contents to the app root you select in cPanel.
+Use the project root as the cPanel app root. Do not point cPanel at the source folders such as [src](src) or the TypeScript entry [server.ts](server.ts).
 
-Required files:
+Required runtime files and folders:
 - package.json
 - app.js
 - dist-server.cjs
-- server.ts
+- dist/
 - data/
-- src/
-- node_modules/ (after running npm install)
 - public/ (optional)
+- node_modules/ (after running npm install)
+
+The app root must be the folder that contains [package.json](package.json) and [app.js](app.js).
 
 ## 2. In cPanel, create a Node.js app
 Use these values:

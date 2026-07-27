@@ -11,11 +11,11 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode.toLowerCase() === "admin") {
+    if (passcode === "@genticpurplpe") {
       setLoginError("");
       onSuccess();
     } else {
-      setLoginError("Invalid developer passcode. Try using 'admin'.");
+      setLoginError("Invalid login passcode. Try using '@genticpurplpe'.");
     }
   };
 
@@ -25,9 +25,9 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
         <div className="w-12 h-12 bg-yellow-300 text-slate-900 border-2 border-slate-900 flex items-center justify-center mx-auto mb-4 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
           <Lock className="w-5 h-5 stroke-[2.5]" />
         </div>
-        <h3 className="text-2xl font-black font-display text-slate-900 uppercase tracking-tight">Developer Gate</h3>
+        <h3 className="text-2xl font-black font-display text-slate-900 uppercase tracking-tight">Login</h3>
         <p className="text-xs text-slate-500 mt-2 font-medium">
-          Enter your developer passcode to access pipeline leads, analytics, and showcase configuration.
+          Enter your login passcode to access pipeline leads, analytics, and showcase configuration.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
             required
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
-            placeholder="e.g. admin"
+            placeholder="e.g. @genticpurplpe"
             className="w-full px-4 py-2.5 text-sm bg-slate-50 border-2 border-slate-900 focus:bg-white focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all font-mono font-bold"
           />
         </div>
@@ -60,11 +60,6 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
         </button>
       </form>
 
-      <div className="mt-6 pt-5 border-t-2 border-slate-200 text-center">
-        <span className="text-[11px] text-slate-500 font-mono font-bold">
-          💡 Hint: use <strong className="text-slate-900 underline">admin</strong> to login
-        </span>
-      </div>
     </div>
   );
 }

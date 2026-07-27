@@ -363,7 +363,7 @@ export default function App() {
         ) : (
           
           /* ==============================================
-             DEVELOPER CRM & ADMIN VIEW
+             LOGIN VIEW
              ============================================== */
           <div className="space-y-6">
             {!isCrmAuthenticated ? (

@@ -48,7 +48,7 @@ export function Header({ activeTab, setActiveTab, isCrmAuthenticated }: HeaderPr
             }`}
           >
             {isCrmAuthenticated ? <Unlock className="w-3.5 h-3.5 text-emerald-400 stroke-[2.5]" /> : <Lock className="w-3.5 h-3.5 stroke-[2.5]" />}
-            Developer CRM
+            Login
           </button>
         </div>
       </div>

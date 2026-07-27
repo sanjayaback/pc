@@ -25,7 +25,7 @@ export interface Lead {
   message: string;
   status: LeadStatus;
   value: number; // Estimated deal/project value in USD
-  notes: string; // Private developer CRM notes
+  notes: string; // Private lead notes
   createdAt: string;
   updatedAt: string;
 }
