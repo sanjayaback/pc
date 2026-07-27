@@ -1,1 +1,37 @@
+name: Deploy to cPanel
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies & Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Sync pre-built files to cPanel
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 190.92.174.30
+          username: purplecl
+          key: ${{ secrets.SERVER_KEY }}
+          port: 22
+          script: |
+            cd ~/repositories/pc
+            git pull origin main
+            /bin/cp -R * ~/papp/
+            source /home/purplecl/nodevenv/papp/18/bin/activate && cd ~/papp && npm install --omit=dev
+            mkdir -p ~/papp/tmp && touch ~/papp/tmp/restart.txt
