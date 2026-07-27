@@ -286,10 +286,22 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = import_path.default.join(process.cwd(), "dist");
-    app.use(import_express.default.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(import_path.default.join(distPath, "index.html"));
-    });
+    const publicPath = import_path.default.join(process.cwd(), "public");
+    if (import_fs.default.existsSync(distPath)) {
+      app.use(import_express.default.static(distPath));
+      app.get("*", (req, res) => {
+        res.sendFile(import_path.default.join(distPath, "index.html"));
+      });
+    } else if (import_fs.default.existsSync(publicPath)) {
+      app.use(import_express.default.static(publicPath));
+      app.get("*", (req, res) => {
+        res.sendFile(import_path.default.join(publicPath, "index.html"));
+      });
+    } else {
+      app.get("*", (req, res) => {
+        res.type("html").send(`<!doctype html><html><head><meta charset="utf-8" /><title>Purple Clone</title></head><body><h1>Purple Clone app is running</h1><p>The production bundle is not present yet. Please run npm run build.</p></body></html>`);
+      });
+    }
   }
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -297,10 +297,22 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
+    const publicPath = path.join(process.cwd(), "public");
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+      app.get("*", (req, res) => {
+        res.sendFile(path.join(distPath, "index.html"));
+      });
+    } else if (fs.existsSync(publicPath)) {
+      app.use(express.static(publicPath));
+      app.get("*", (req, res) => {
+        res.sendFile(path.join(publicPath, "index.html"));
+      });
+    } else {
+      app.get("*", (req, res) => {
+        res.type("html").send(`<!doctype html><html><head><meta charset="utf-8" /><title>Purple Clone</title></head><body><h1>Purple Clone app is running</h1><p>The production bundle is not present yet. Please run npm run build.</p></body></html>`);
+      });
+    }
   }
 
   app.listen(PORT, () => {
