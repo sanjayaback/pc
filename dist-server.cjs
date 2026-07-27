@@ -1,11 +1,32 @@
-import express from "express";
-import path from "path";
-import fs from "fs";
-import { createServer as createViteServer } from "vite";
-import { AppItem, Lead } from "./src/types";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 
-// Seed Data
-const DEFAULT_APPS: AppItem[] = [
+// server.ts
+var import_express = __toESM(require("express"));
+var import_path = __toESM(require("path"));
+var import_fs = __toESM(require("fs"));
+var import_vite = require("vite");
+var DEFAULT_APPS = [
   {
     id: "cloneagent-support",
     name: "CloneAgent Support",
@@ -17,7 +38,7 @@ const DEFAULT_APPS: AppItem[] = [
     url: "https://cloneagent.purpleclone.com",
     logo: "Bot",
     features: ["Autonomous multi-channel support", "Instant CRM database synchronization", "Semantic intent recognition", "Graceful handoff to human operators"],
-    createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
+    createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1e3).toISOString()
   },
   {
     id: "workflow-optimizer",
@@ -30,7 +51,7 @@ const DEFAULT_APPS: AppItem[] = [
     url: "https://optimizer.purpleclone.com",
     logo: "Zap",
     features: ["Natural language pipeline compiler", "Self-healing error state recovery", "Pre-built webhook connectors", "Detailed visual execution logs"],
-    createdAt: new Date(Date.now() - 15 * 24 * 3600 * 1000).toISOString()
+    createdAt: new Date(Date.now() - 15 * 24 * 3600 * 1e3).toISOString()
   },
   {
     id: "datasift-extractor",
@@ -43,7 +64,7 @@ const DEFAULT_APPS: AppItem[] = [
     url: "https://datasift.purpleclone.com",
     logo: "Database",
     features: ["Structured JSON schema exports", "Handwritten text OCR recognition", "Batch folder monitoring", "Enterprise-grade compliance security"],
-    createdAt: new Date(Date.now() - 5 * 24 * 3600 * 1000).toISOString()
+    createdAt: new Date(Date.now() - 5 * 24 * 3600 * 1e3).toISOString()
   },
   {
     id: "autonomous-leadscout",
@@ -56,11 +77,10 @@ const DEFAULT_APPS: AppItem[] = [
     url: "",
     logo: "Search",
     features: ["Intent signal scraping engine", "Hyper-personalized email draft builder", "Automated multi-stage followups", "Verified contact address checks"],
-    createdAt: new Date().toISOString()
+    createdAt: (/* @__PURE__ */ new Date()).toISOString()
   }
 ];
-
-const DEFAULT_LEADS: Lead[] = [
+var DEFAULT_LEADS = [
   {
     id: "lead-1",
     appId: "cloneagent-support",
@@ -72,8 +92,8 @@ const DEFAULT_LEADS: Lead[] = [
     status: "Qualified",
     value: 4500,
     notes: "Wants customized knowledge training and custom fine-tuning. Setup intro call for next Monday.",
-    createdAt: new Date(Date.now() - 3 * 24 * 3600 * 1000).toISOString(),
-    updatedAt: new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString()
+    createdAt: new Date(Date.now() - 3 * 24 * 3600 * 1e3).toISOString(),
+    updatedAt: new Date(Date.now() - 2 * 24 * 3600 * 1e3).toISOString()
   },
   {
     id: "lead-2",
@@ -86,8 +106,8 @@ const DEFAULT_LEADS: Lead[] = [
     status: "Contacted",
     value: 2800,
     notes: "Freight email parsing and automated dispatch. Shared optimization diagram. Waiting on technical walkthrough callback.",
-    createdAt: new Date(Date.now() - 1 * 24 * 3600 * 1000).toISOString(),
-    updatedAt: new Date(Date.now() - 1 * 24 * 3600 * 1000).toISOString()
+    createdAt: new Date(Date.now() - 1 * 24 * 3600 * 1e3).toISOString(),
+    updatedAt: new Date(Date.now() - 1 * 24 * 3600 * 1e3).toISOString()
   },
   {
     id: "lead-3",
@@ -98,71 +118,58 @@ const DEFAULT_LEADS: Lead[] = [
     clientCompany: "Finovate Labs",
     message: "We are looking to build a highly tailored agentic AI model to automate our internal risk analysis and compliance check operations. Could the Purple Clone team build a custom enterprise agent on a freelance/consulting basis?",
     status: "Proposal",
-    value: 15000,
+    value: 15e3,
     notes: "High priority custom agentic compliance project. Sent formal proposal document for $15,000. Under review by leadership.",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+    updatedAt: (/* @__PURE__ */ new Date()).toISOString()
   }
 ];
-
-// Ensure database directory exists
-const DATA_DIR = path.join(process.cwd(), "data");
-const APPS_FILE = path.join(DATA_DIR, "apps.json");
-const LEADS_FILE = path.join(DATA_DIR, "leads.json");
-
+var DATA_DIR = import_path.default.join(process.cwd(), "data");
+var APPS_FILE = import_path.default.join(DATA_DIR, "apps.json");
+var LEADS_FILE = import_path.default.join(DATA_DIR, "leads.json");
 function initStorage() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!import_fs.default.existsSync(DATA_DIR)) {
+    import_fs.default.mkdirSync(DATA_DIR, { recursive: true });
   }
-  if (!fs.existsSync(APPS_FILE)) {
-    fs.writeFileSync(APPS_FILE, JSON.stringify(DEFAULT_APPS, null, 2));
+  if (!import_fs.default.existsSync(APPS_FILE)) {
+    import_fs.default.writeFileSync(APPS_FILE, JSON.stringify(DEFAULT_APPS, null, 2));
   }
-  if (!fs.existsSync(LEADS_FILE)) {
-    fs.writeFileSync(LEADS_FILE, JSON.stringify(DEFAULT_LEADS, null, 2));
+  if (!import_fs.default.existsSync(LEADS_FILE)) {
+    import_fs.default.writeFileSync(LEADS_FILE, JSON.stringify(DEFAULT_LEADS, null, 2));
   }
 }
-
 initStorage();
-
-function readApps(): AppItem[] {
+function readApps() {
   try {
-    const raw = fs.readFileSync(APPS_FILE, "utf-8");
+    const raw = import_fs.default.readFileSync(APPS_FILE, "utf-8");
     return JSON.parse(raw);
   } catch (e) {
     return DEFAULT_APPS;
   }
 }
-
-function writeApps(data: AppItem[]) {
-  fs.writeFileSync(APPS_FILE, JSON.stringify(data, null, 2));
+function writeApps(data) {
+  import_fs.default.writeFileSync(APPS_FILE, JSON.stringify(data, null, 2));
 }
-
-function readLeads(): Lead[] {
+function readLeads() {
   try {
-    const raw = fs.readFileSync(LEADS_FILE, "utf-8");
+    const raw = import_fs.default.readFileSync(LEADS_FILE, "utf-8");
     return JSON.parse(raw);
   } catch (e) {
     return DEFAULT_LEADS;
   }
 }
-
-function writeLeads(data: Lead[]) {
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(data, null, 2));
+function writeLeads(data) {
+  import_fs.default.writeFileSync(LEADS_FILE, JSON.stringify(data, null, 2));
 }
-
 async function startServer() {
-  const app = express();
-
-  app.use(express.json());
-
-  // API Endpoints: Apps
+  const app = (0, import_express.default)();
+  app.use(import_express.default.json());
   app.get("/api/apps", (req, res) => {
     res.json(readApps());
   });
-
   app.post("/api/apps", (req, res) => {
     const apps = readApps();
-    const newApp: AppItem = {
+    const newApp = {
       id: req.body.id || req.body.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       name: req.body.name,
       description: req.body.description || "",
@@ -173,67 +180,57 @@ async function startServer() {
       url: req.body.url || "",
       logo: req.body.logo || "Globe",
       features: req.body.features || [],
-      createdAt: new Date().toISOString()
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
     };
-    
-    // Ensure uniqueness of ID
     let count = 1;
     let baseId = newApp.id;
-    while (apps.some(a => a.id === newApp.id)) {
+    while (apps.some((a) => a.id === newApp.id)) {
       newApp.id = `${baseId}-${count}`;
       count++;
     }
-
     apps.push(newApp);
     writeApps(apps);
     res.status(201).json(newApp);
   });
-
   app.put("/api/apps/:id", (req, res) => {
     const { id } = req.params;
     const apps = readApps();
-    const index = apps.findIndex(a => a.id === id);
+    const index = apps.findIndex((a) => a.id === id);
     if (index === -1) {
       return res.status(404).json({ error: "App not found" });
     }
-
     apps[index] = {
       ...apps[index],
-      name: req.body.name !== undefined ? req.body.name : apps[index].name,
-      description: req.body.description !== undefined ? req.body.description : apps[index].description,
-      category: req.body.category !== undefined ? req.body.category : apps[index].category,
-      priceModel: req.body.priceModel !== undefined ? req.body.priceModel : apps[index].priceModel,
-      price: req.body.price !== undefined ? req.body.price : apps[index].price,
-      status: req.body.status !== undefined ? req.body.status : apps[index].status,
-      url: req.body.url !== undefined ? req.body.url : apps[index].url,
-      logo: req.body.logo !== undefined ? req.body.logo : apps[index].logo,
-      features: req.body.features !== undefined ? req.body.features : apps[index].features,
+      name: req.body.name !== void 0 ? req.body.name : apps[index].name,
+      description: req.body.description !== void 0 ? req.body.description : apps[index].description,
+      category: req.body.category !== void 0 ? req.body.category : apps[index].category,
+      priceModel: req.body.priceModel !== void 0 ? req.body.priceModel : apps[index].priceModel,
+      price: req.body.price !== void 0 ? req.body.price : apps[index].price,
+      status: req.body.status !== void 0 ? req.body.status : apps[index].status,
+      url: req.body.url !== void 0 ? req.body.url : apps[index].url,
+      logo: req.body.logo !== void 0 ? req.body.logo : apps[index].logo,
+      features: req.body.features !== void 0 ? req.body.features : apps[index].features
     };
-
     writeApps(apps);
     res.json(apps[index]);
   });
-
   app.delete("/api/apps/:id", (req, res) => {
     const { id } = req.params;
     let apps = readApps();
     const initialLen = apps.length;
-    apps = apps.filter(a => a.id !== id);
+    apps = apps.filter((a) => a.id !== id);
     if (apps.length === initialLen) {
       return res.status(404).json({ error: "App not found" });
     }
     writeApps(apps);
     res.json({ success: true });
   });
-
-  // API Endpoints: Leads
   app.get("/api/leads", (req, res) => {
     res.json(readLeads());
   });
-
   app.post("/api/leads", (req, res) => {
     const leads = readLeads();
-    const newLead: Lead = {
+    const newLead = {
       id: "lead-" + Math.random().toString(36).substr(2, 9),
       appId: req.body.appId || "general",
       appName: req.body.appName || "General Inquiry",
@@ -244,68 +241,59 @@ async function startServer() {
       status: "New",
       value: Number(req.body.value) || 0,
       notes: req.body.notes || "",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
     };
-
     leads.push(newLead);
     writeLeads(leads);
     res.status(201).json(newLead);
   });
-
   app.put("/api/leads/:id", (req, res) => {
     const { id } = req.params;
     const leads = readLeads();
-    const index = leads.findIndex(l => l.id === id);
+    const index = leads.findIndex((l) => l.id === id);
     if (index === -1) {
       return res.status(404).json({ error: "Lead not found" });
     }
-
     leads[index] = {
       ...leads[index],
-      status: req.body.status !== undefined ? req.body.status : leads[index].status,
-      value: req.body.value !== undefined ? Number(req.body.value) : leads[index].value,
-      notes: req.body.notes !== undefined ? req.body.notes : leads[index].notes,
-      updatedAt: new Date().toISOString()
+      status: req.body.status !== void 0 ? req.body.status : leads[index].status,
+      value: req.body.value !== void 0 ? Number(req.body.value) : leads[index].value,
+      notes: req.body.notes !== void 0 ? req.body.notes : leads[index].notes,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
     };
-
     writeLeads(leads);
     res.json(leads[index]);
   });
-
   app.delete("/api/leads/:id", (req, res) => {
     const { id } = req.params;
     let leads = readLeads();
     const initialLen = leads.length;
-    leads = leads.filter(l => l.id !== id);
+    leads = leads.filter((l) => l.id !== id);
     if (leads.length === initialLen) {
       return res.status(404).json({ error: "Lead not found" });
     }
     writeLeads(leads);
     res.json({ success: true });
   });
-
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3e3;
   const isDevMode = process.argv.includes("--dev") || process.env.NODE_ENV === "development";
-
-  // Serve Vite in development, static files in production
   if (isDevMode) {
-    const vite = await createViteServer({
+    const vite = await (0, import_vite.createServer)({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "spa"
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    const distPath = import_path.default.join(process.cwd(), "dist");
+    app.use(import_express.default.static(distPath));
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.sendFile(import_path.default.join(distPath, "index.html"));
     });
   }
-
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
 }
-
 startServer();
+//# sourceMappingURL=dist-server.cjs.map
