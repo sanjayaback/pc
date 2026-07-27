@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/purplecl/papp
+    - /bin/cp -R * $DEPLOYPATH
+    - source /home/purplecl/nodevenv/papp/18/bin/activate && cd $DEPLOYPATH && npm install
+    - mkdir -p $DEPLOYPATH/tmp && touch $DEPLOYPATH/tmp/restart.txt
