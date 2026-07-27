@@ -1,0 +1,58 @@
+[
+  {
+    "id": "lead-1",
+    "appId": "cloneagent-support",
+    "appName": "CloneAgent Support",
+    "clientName": "Sarah Jenkins",
+    "clientEmail": "sarah.j@quantumtech.com",
+    "clientCompany": "QuantumTech",
+    "message": "We are evaluating CloneAgent Support to handle our first-tier customer inquiries. We have about 12,000 requests monthly. Does Purple Clone support customized knowledge-base training and custom database integrations?",
+    "status": "Qualified",
+    "value": 4500,
+    "notes": "Wants customized knowledge training and custom fine-tuning. Setup intro call for next Monday.",
+    "createdAt": "2026-07-14T13:27:10.019Z",
+    "updatedAt": "2026-07-15T13:27:10.019Z"
+  },
+  {
+    "id": "lead-2",
+    "appId": "workflow-optimizer",
+    "appName": "WorkflowOptimizer Pro",
+    "clientName": "Marcus Vance",
+    "clientEmail": "m.vance@logistics-plus.com",
+    "clientCompany": "Logistics Plus",
+    "message": "Looking to automate our daily order dispatching workflows. We want to parse incoming freight emails, extract tracking IDs, and push them to our shipping software. Can WorkflowOptimizer Pro achieve this with high reliability?",
+    "status": "Contacted",
+    "value": 2800,
+    "notes": "Freight email parsing and automated dispatch. Shared optimization diagram. Waiting on technical walkthrough callback.",
+    "createdAt": "2026-07-16T13:27:10.019Z",
+    "updatedAt": "2026-07-16T13:27:10.019Z"
+  },
+  {
+    "id": "lead-3",
+    "appId": "general",
+    "appName": "General Inquiry",
+    "clientName": "Helena Rostova",
+    "clientEmail": "helena@finovate.io",
+    "clientCompany": "Finovate Labs",
+    "message": "We are looking to build a highly tailored agentic AI model to automate our internal risk analysis and compliance check operations. Could the Purple Clone team build a custom enterprise agent on a freelance/consulting basis?",
+    "status": "Proposal",
+    "value": 15000,
+    "notes": "High priority custom agentic compliance project. Sent formal proposal document for $15,000. Under review by leadership.",
+    "createdAt": "2026-07-17T13:27:10.019Z",
+    "updatedAt": "2026-07-17T13:27:10.019Z"
+  },
+  {
+    "id": "lead-4jddfqhxo",
+    "appId": "cloneagent-support",
+    "appName": "CloneAgent Support",
+    "clientName": "Purple Clone",
+    "clientEmail": "purpleclone@gmail.com",
+    "clientCompany": "ktm DELIZABAZAR",
+    "message": "OKHGHGHG",
+    "status": "New",
+    "value": 1500,
+    "notes": "Inquiry generated from the Public Contact Us portal.",
+    "createdAt": "2026-07-17T13:31:52.133Z",
+    "updatedAt": "2026-07-17T13:31:52.133Z"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cloneagent-support",
+    "name": "CloneAgent Support",
+    "description": "An autonomous customer service agent running on Purple Clone's specialized agentic architecture. Resolves client support tickets, schedules live demos, and synchronizes CRM databases in real-time.",
+    "category": "AI Agents",
+    "priceModel": "SaaS License",
+    "price": "$149/mo starter",
+    "status": "Active",
+    "url": "https://cloneagent.purpleclone.com",
+    "logo": "Bot",
+    "features": [
+      "Autonomous multi-channel support",
+      "Instant CRM database synchronization",
+      "Semantic intent recognition",
+      "Graceful handoff to human operators"
+    ],
+    "createdAt": "2026-06-17T11:41:57.112Z"
+  },
+  {
+    "id": "workflow-optimizer",
+    "name": "WorkflowOptimizer Pro",
+    "description": "Transform manual routines into bulletproof autonomous integration pipelines. Instantly connects databases, webhooks, email servers, and enterprise APIs using plain natural language flow commands.",
+    "category": "Workflow Automation",
+    "priceModel": "SaaS License",
+    "price": "$89/mo startup",
+    "status": "Active",
+    "url": "https://optimizer.purpleclone.com",
+    "logo": "Zap",
+    "features": [
+      "Natural language pipeline compiler",
+      "Self-healing error state recovery",
+      "Pre-built webhook connectors",
+      "Detailed visual execution logs"
+    ],
+    "createdAt": "2026-07-02T11:41:57.112Z"
+  },
+  {
+    "id": "datasift-extractor",
+    "name": "DataSift AI Extractor",
+    "description": "Extract structured metrics, deep insights, structured tables, and custom JSON schemas from chaotic multi-page PDFs, paper scans, and corporate emails automatically with 99.4% accuracy.",
+    "category": "AI Automation",
+    "priceModel": "Usage-Based",
+    "price": "$0.02 per page",
+    "status": "Beta",
+    "url": "https://datasift.purpleclone.com",
+    "logo": "Database",
+    "features": [
+      "Structured JSON schema exports",
+      "Handwritten text OCR recognition",
+      "Batch folder monitoring",
+      "Enterprise-grade compliance security"
+    ],
+    "createdAt": "2026-07-12T11:41:57.112Z"
+  },
+  {
+    "id": "autonomous-leadscout",
+    "name": "Autonomous LeadScout",
+    "description": "Agentic prospecting web crawler scanning corporate filings, news feeds, and professional networks to identify real-time buying intent signals and draft tailored outreach strategies.",
+    "category": "AI Agents",
+    "priceModel": "Subscription",
+    "price": "$199/mo per seat",
+    "status": "Development",
+    "url": "",
+    "logo": "Search",
+    "features": [
+      "Intent signal scraping engine",
+      "Hyper-personalized email draft builder",
+      "Automated multi-stage followups",
+      "Verified contact address checks"
+    ],
+    "createdAt": "2026-07-17T11:41:57.112Z"
+  }
+]

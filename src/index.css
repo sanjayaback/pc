@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f3f4f6; /* grey-100 for premium grid backing */
+  color: #0f172a; /* slate-900 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Neo-brutalist custom helper styles */
+.bento-border {
+  border: 2px solid #0f172a;
+}
+
+.bento-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #0f172a;
+}
+
+.bento-shadow-md {
+  box-shadow: 4px 4px 0px 0px #0f172a;
+}
+
+.bento-shadow-lg {
+  box-shadow: 6px 6px 0px 0px #0f172a;
+}
+
+.bento-shadow-xl {
+  box-shadow: 8px 8px 0px 0px #0f172a;
+}
+
+/* Hover transitions */
+.bento-hover-trigger:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #0f172a;
+}
+
+.bento-hover-trigger-sm:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px #0f172a;
+}
+
+/* Custom scrollbar to keep layout highly polished */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-left: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 2px solid #0f172a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
