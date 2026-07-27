@@ -16,7 +16,7 @@ The app root must be the folder that contains [package.json](package.json) and [
 
 ## 2. In cPanel, create a Node.js app
 Use these values:
-- Application root: /home/purplecl/pc
+- Application root: /home/purplecl/papp
 - Startup file: app.js
 - Node version: 18
 
@@ -27,6 +27,8 @@ If SSH access is available:
 npm install
 npm run build
 ```
+
+If using automated cPanel deployment, the deploy script now runs `npm install && npm run build` automatically.
 
 ## 4. Start the app
 Use one of these:
