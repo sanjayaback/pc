@@ -55,7 +55,7 @@ export const LeadManager: React.FC<LeadManagerProps> = ({ leads, onUpdateLead, o
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this lead from the CRM?")) {
+    if (confirm("Are you sure you want to delete this lead?")) {
       await onDeleteLead(id);
       setSelectedLead(null);
     }
@@ -205,14 +205,14 @@ export const LeadManager: React.FC<LeadManagerProps> = ({ leads, onUpdateLead, o
         </div>
       </div>
 
-      {/* Selected Lead CRM Detail Editor Drawer (1 column) */}
+      {/* Selected Lead Detail Editor Drawer (1 column) */}
       <div className="bg-white border-2 border-slate-900 rounded-none p-6 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
         {selectedLead ? (
           <div className="space-y-5">
             {/* Lead Meta Header */}
             <div className="flex items-start justify-between border-b-2 border-slate-900 pb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">CRM Client Details</span>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">Client Details</span>
                 <h3 className="text-xl font-black text-slate-900 font-display mt-0.5">{selectedLead.clientName}</h3>
                 <span className="text-xs text-slate-500 font-mono font-bold">{selectedLead.clientEmail}</span>
               </div>
@@ -247,7 +247,7 @@ export const LeadManager: React.FC<LeadManagerProps> = ({ leads, onUpdateLead, o
               </div>
             </div>
 
-            {/* CRM Editing Fields */}
+            {/* Lead Editing Fields */}
             <div className="space-y-4 pt-2">
               {/* Stage Selector Grid */}
               <div>
@@ -293,10 +293,10 @@ export const LeadManager: React.FC<LeadManagerProps> = ({ leads, onUpdateLead, o
                 </div>
               </div>
 
-              {/* Private Creator CRM Notes */}
+              {/* Private Admin Notes */}
               <div>
                 <label className="block text-xs font-black text-slate-900 uppercase tracking-wider mb-1.5 font-mono">
-                  Private CRM Notes (Developer Only)
+                  Private Notes (Admin Only)
                 </label>
                 <textarea
                   rows={4}

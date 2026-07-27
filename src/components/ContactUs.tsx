@@ -143,9 +143,9 @@ export const ContactUs: React.FC<ContactUsProps> = ({ onSubmissionSuccess }) => 
             </span>
             <span className="text-[10px] font-mono text-slate-400">LATENCY: 14MS</span>
           </div>
-          <h4 className="text-sm font-bold uppercase font-display tracking-tight text-white">CRM Integration Active</h4>
+          <h4 className="text-sm font-bold uppercase font-display tracking-tight text-white">Lead Routing Active</h4>
           <p className="text-[11px] text-slate-400 font-medium leading-relaxed mt-1">
-            Submitting this form immediately routes details to our active CRM database. You can inspect the logs directly by logging into the Login view.
+            Submitting this form immediately routes details to our active lead database. You can inspect the logs directly by logging into the Login view.
           </p>
         </div>
       </div>

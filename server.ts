@@ -1,22 +1,25 @@
+import dotenv from "dotenv";
 import express from "express";
 import path from "path";
 import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { AppItem, Lead } from "./src/types";
 
+dotenv.config();
+
 // Seed Data
 const DEFAULT_APPS: AppItem[] = [
   {
     id: "cloneagent-support",
     name: "CloneAgent Support",
-    description: "An autonomous customer service agent running on Purple Clone's specialized agentic architecture. Resolves client support tickets, schedules live demos, and synchronizes CRM databases in real-time.",
+    description: "An autonomous customer service agent running on Purple Clone's specialized agentic architecture. Resolves client support tickets, schedules live demos, and synchronizes customer databases in real-time.",
     category: "AI Agents",
     priceModel: "SaaS License",
     price: "$149/mo starter",
     status: "Active",
     url: "https://cloneagent.purpleclone.com",
     logo: "Bot",
-    features: ["Autonomous multi-channel support", "Instant CRM database synchronization", "Semantic intent recognition", "Graceful handoff to human operators"],
+    features: ["Autonomous multi-channel support", "Instant data synchronization", "Semantic intent recognition", "Graceful handoff to human operators"],
     createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()
   },
   {
@@ -154,6 +157,33 @@ async function startServer() {
   const app = express();
 
   app.use(express.json());
+
+  // API Endpoints: Login
+  app.post("/api/login", (req, res) => {
+    const passcode = req.body?.passcode;
+    const expected = process.env.LOGIN_PASSCODE || "@genticpurplpe";
+
+    if (typeof passcode !== "string" || passcode.length === 0) {
+      return res.status(400).json({ error: "Passcode is required." });
+    }
+
+    if (passcode === expected) {
+      return res.json({ success: true });
+    }
+
+    return res.status(401).json({ error: "Invalid passcode." });
+  });
+
+  app.get("/api/login-config", (req, res) => {
+    res.json({
+      title: process.env.LOGIN_TITLE || "Login",
+      description:
+        process.env.LOGIN_DESCRIPTION ||
+        "Enter your login passcode to access pipeline leads, analytics, and showcase configuration.",
+      buttonText: process.env.LOGIN_BUTTON_TEXT || "Unlock Portal",
+      placeholder: process.env.LOGIN_PLACEHOLDER || "Enter passcode"
+    });
+  });
 
   // API Endpoints: Apps
   app.get("/api/apps", (req, res) => {

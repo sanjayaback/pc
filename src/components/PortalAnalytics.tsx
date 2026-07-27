@@ -2,12 +2,12 @@ import React from "react";
 import { DollarSign, Inbox, Percent, Flame, Layers } from "lucide-react";
 import { Lead, AppItem } from "../types";
 
-interface CrmAnalyticsProps {
+interface PortalAnalyticsProps {
   leads: Lead[];
   apps: AppItem[];
 }
 
-export const CrmAnalytics: React.FC<CrmAnalyticsProps> = ({ leads, apps }) => {
+export const PortalAnalytics: React.FC<PortalAnalyticsProps> = ({ leads, apps }) => {
   // 1. Calculate Core Statistics
   const totalLeads = leads.length;
   
@@ -90,7 +90,7 @@ export const CrmAnalytics: React.FC<CrmAnalyticsProps> = ({ leads, apps }) => {
             <h4 className="text-3xl font-black text-slate-900 mt-3 font-display">
               ${wonRevenue.toLocaleString()}
             </h4>
-            <span className="text-[10px] text-slate-800 font-mono mt-1 block font-bold">Closed-Won developer deals</span>
+            <span className="text-[10px] text-slate-800 font-mono mt-1 block font-bold">Closed-Won revenue opportunities</span>
           </div>
           <div className="p-3 bg-white border-2 border-slate-900 text-slate-900 rounded-none shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0">
             <Flame className="w-5 h-5 stroke-[2.5]" />
@@ -132,7 +132,7 @@ export const CrmAnalytics: React.FC<CrmAnalyticsProps> = ({ leads, apps }) => {
         <div className="bg-white border-2 border-slate-900 rounded-none p-6 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] flex flex-col justify-between">
           <div>
             <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight font-display">Deal Stage Funnel</h3>
-            <p className="text-xs text-slate-500 font-medium mt-1 mb-6">Distribution of inquiries across CRM lifecycle phases.</p>
+            <p className="text-xs text-slate-500 font-medium mt-1 mb-6">Distribution of inquiries across lifecycle phases.</p>
             
             <div className="space-y-4">
               {statuses.map((stat, idx) => {

@@ -5,7 +5,7 @@ import {
 import { AppItem, Lead } from "./types";
 import { AppCard } from "./components/AppCard";
 import { LeadForm } from "./components/LeadForm";
-import { CrmAnalytics } from "./components/CrmAnalytics";
+import { PortalAnalytics } from "./components/PortalAnalytics";
 import { LeadManager } from "./components/LeadManager";
 import { AppCatalog } from "./components/AppCatalog";
 import { AboutUs } from "./components/AboutUs";
@@ -16,9 +16,9 @@ import { LoginGate } from "./components/LoginGate";
 
 export default function App() {
   // Navigation & Mode State
-  const [activeTab, setActiveTab] = useState<"showcase" | "crm">("showcase");
+  const [activeTab, setActiveTab] = useState<"showcase" | "portal">("showcase");
   const [showcaseTab, setShowcaseTab] = useState<"catalog" | "about" | "contact">("catalog");
-  const [crmView, setCrmView] = useState<"analytics" | "leads" | "catalog">("analytics");
+  const [portalView, setPortalView] = useState<"analytics" | "leads" | "catalog">("analytics");
 
   // Database State
   const [apps, setApps] = useState<AppItem[]>([]);
@@ -33,14 +33,14 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // CRM Password Gate State
-  const [isCrmAuthenticated, setIsCrmAuthenticated] = useState(false);
+  // Portal Password Gate State
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Load state from sessionStorage if they already logged in during this browser session
   useEffect(() => {
-    const auth = sessionStorage.getItem("crm_auth");
+    const auth = sessionStorage.getItem("portal_auth");
     if (auth === "true") {
-      setIsCrmAuthenticated(true);
+      setIsAuthenticated(true);
     }
   }, []);
 
@@ -82,7 +82,7 @@ export default function App() {
     }
   };
 
-  // CRM - Lead Update handler
+  // Lead Update handler
   const handleUpdateLead = async (leadId: string, updates: Partial<Lead>) => {
     try {
       const res = await fetch(`/api/leads/${leadId}`, {
@@ -95,11 +95,11 @@ export default function App() {
       setLeads((prev) => prev.map((l) => (l.id === leadId ? updatedLead : l)));
     } catch (err) {
       console.error(err);
-      alert("Error updating lead status in CRM database");
+      alert("Error updating lead status in portal database");
     }
   };
 
-  // CRM - Lead Delete handler
+  // Lead Delete handler
   const handleDeleteLead = async (leadId: string) => {
     try {
       const res = await fetch(`/api/leads/${leadId}`, { method: "DELETE" });
@@ -107,11 +107,11 @@ export default function App() {
       setLeads((prev) => prev.filter((l) => l.id !== leadId));
     } catch (err) {
       console.error(err);
-      alert("Error deleting lead from CRM database");
+      alert("Error deleting lead from portal database");
     }
   };
 
-  // CRM - App Create handler
+  // App Create handler
   const handleCreateApp = async (appData: Omit<AppItem, "id">) => {
     try {
       const res = await fetch("/api/apps", {
@@ -128,7 +128,7 @@ export default function App() {
     }
   };
 
-  // CRM - App Update handler
+  // App Update handler
   const handleUpdateApp = async (id: string, updates: Partial<AppItem>) => {
     try {
       const res = await fetch(`/api/apps/${id}`, {
@@ -145,7 +145,7 @@ export default function App() {
     }
   };
 
-  // CRM - App Delete handler
+  // App Delete handler
   const handleDeleteApp = async (id: string) => {
     try {
       const res = await fetch(`/api/apps/${id}`, { method: "DELETE" });
@@ -159,13 +159,13 @@ export default function App() {
 
   // Login Handle
   const handleLoginSuccess = () => {
-    setIsCrmAuthenticated(true);
-    sessionStorage.setItem("crm_auth", "true");
+    setIsAuthenticated(true);
+    sessionStorage.setItem("portal_auth", "true");
   };
 
   const handleLogout = () => {
-    setIsCrmAuthenticated(false);
-    sessionStorage.removeItem("crm_auth");
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("portal_auth");
   };
 
   // Open Inquiry Modal
@@ -192,14 +192,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col selection:bg-yellow-200">
       {/* Top Neobrutalist Premium Header */}
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} isCrmAuthenticated={isCrmAuthenticated} />
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} isAuthenticated={isAuthenticated} />
 
       {/* Main Content Area */}
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-8 py-8">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-24">
             <div className="w-12 h-12 border-4 border-slate-900 border-t-yellow-300 animate-spin rounded-none mb-4"></div>
-            <p className="text-xs text-slate-500 font-mono font-bold uppercase tracking-wider">Mounting persistent CRM tables...</p>
+            <p className="text-xs text-slate-500 font-mono font-bold uppercase tracking-wider">Mounting persistent portal tables...</p>
           </div>
         ) : activeTab === "showcase" ? (
           
@@ -366,12 +366,12 @@ export default function App() {
              LOGIN VIEW
              ============================================== */
           <div className="space-y-6">
-            {!isCrmAuthenticated ? (
+            {!isAuthenticated ? (
               
               <LoginGate onSuccess={handleLoginSuccess} />
             ) : (
               
-              /* CRM Panel Interface */
+              /* Admin Portal Interface */
               <div className="space-y-6">
                 
                 {/* Panel Top Navigation bar */}
@@ -380,10 +380,10 @@ export default function App() {
                   {/* Dashboard Subviews */}
                   <div className="flex flex-wrap gap-2">
                     <button
-                      id="crm-btn-analytics"
-                      onClick={() => setCrmView("analytics")}
+                      id="portal-btn-analytics"
+                      onClick={() => setPortalView("analytics")}
                       className={`px-4 py-2 text-xs font-black uppercase tracking-wider border-2 transition-all ${
-                        crmView === "analytics"
+                        portalView === "analytics"
                           ? "bg-slate-900 text-white shadow-none"
                           : "bg-slate-50 text-slate-700 hover:bg-slate-100"
                       }`}
@@ -391,10 +391,10 @@ export default function App() {
                       Metrics & Funnels
                     </button>
                     <button
-                      id="crm-btn-leads"
-                      onClick={() => setCrmView("leads")}
+                      id="portal-btn-leads"
+                      onClick={() => setPortalView("leads")}
                       className={`px-4 py-2 text-xs font-black uppercase tracking-wider flex items-center gap-2 border-2 transition-all ${
-                        crmView === "leads"
+                        portalView === "leads"
                           ? "bg-slate-900 text-white shadow-none"
                           : "bg-slate-50 text-slate-700 hover:bg-slate-100"
                       }`}
@@ -405,10 +405,10 @@ export default function App() {
                       </span>
                     </button>
                     <button
-                      id="crm-btn-catalog"
-                      onClick={() => setCrmView("catalog")}
+                      id="portal-btn-catalog"
+                      onClick={() => setPortalView("catalog")}
                       className={`px-4 py-2 text-xs font-black uppercase tracking-wider border-2 transition-all ${
-                        crmView === "catalog"
+                        portalView === "catalog"
                           ? "bg-slate-900 text-white shadow-none"
                           : "bg-slate-50 text-slate-700 hover:bg-slate-100"
                       }`}
@@ -420,34 +420,34 @@ export default function App() {
                   {/* Auth Meta / Logout */}
                   <div className="flex items-center justify-between md:justify-end gap-4 border-t md:border-t-0 pt-3 md:pt-0 border-slate-200">
                     <span className="text-xs text-slate-500 font-mono font-bold">
-                      Agent: <strong className="text-slate-900 font-black">Developer Root</strong>
+                      Agent: <strong className="text-slate-900 font-black">System Admin</strong>
                     </span>
                     <button
                       onClick={handleLogout}
                       className="px-3.5 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 hover:text-red-900 border-2 border-red-900 text-xs font-black uppercase tracking-wider flex items-center gap-1 transition-colors"
                     >
                       <LogOut className="w-3.5 h-3.5" />
-                      Lock CRM
+                      Lock Portal
                     </button>
                   </div>
                 </div>
 
                 {/* Subview Component Injection */}
                 <div>
-                  {crmView === "analytics" && (
-                    <CrmAnalytics 
+                  {portalView === "analytics" && (
+                    <PortalAnalytics 
                       leads={leads} 
                       apps={apps} 
                     />
                   )}
-                  {crmView === "leads" && (
+                  {portalView === "leads" && (
                     <LeadManager 
                       leads={leads} 
                       onUpdateLead={handleUpdateLead} 
                       onDeleteLead={handleDeleteLead} 
                     />
                   )}
-                  {crmView === "catalog" && (
+                  {portalView === "catalog" && (
                     <AppCatalog 
                       apps={apps} 
                       onAddApp={handleCreateApp} 

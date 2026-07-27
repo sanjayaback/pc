@@ -2,12 +2,12 @@ import React from "react";
 import { Terminal, Unlock, Lock } from "lucide-react";
 
 interface HeaderProps {
-  activeTab: "showcase" | "crm";
-  setActiveTab: (tab: "showcase" | "crm") => void;
-  isCrmAuthenticated: boolean;
+  activeTab: "showcase" | "portal";
+  setActiveTab: (tab: "showcase" | "portal") => void;
+  isAuthenticated: boolean;
 }
 
-export function Header({ activeTab, setActiveTab, isCrmAuthenticated }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, isAuthenticated }: HeaderProps) {
   return (
     <header className="sticky top-0 bg-white border-b-4 border-slate-900 z-30 px-4 sm:px-8 py-4">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -39,15 +39,15 @@ export function Header({ activeTab, setActiveTab, isCrmAuthenticated }: HeaderPr
             Public Gallery
           </button>
           <button
-            id="tab-crm"
-            onClick={() => setActiveTab("crm")}
+            id="tab-portal"
+            onClick={() => setActiveTab("portal")}
             className={`px-4 py-2 text-xs font-black uppercase tracking-wider flex items-center gap-2 transition-all ${
-              activeTab === "crm"
+              activeTab === "portal"
                 ? "bg-slate-900 text-white shadow-none"
                 : "text-slate-700 hover:text-slate-900"
             }`}
           >
-            {isCrmAuthenticated ? <Unlock className="w-3.5 h-3.5 text-emerald-400 stroke-[2.5]" /> : <Lock className="w-3.5 h-3.5 stroke-[2.5]" />}
+            {isAuthenticated ? <Unlock className="w-3.5 h-3.5 text-emerald-400 stroke-[2.5]" /> : <Lock className="w-3.5 h-3.5 stroke-[2.5]" />}
             Login
           </button>
         </div>

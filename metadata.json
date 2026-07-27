@@ -1,6 +1,6 @@
 {
-  "name": "Purple Clone AI Showcase & CRM",
-  "description": "Official showcase gallery and enterprise developer pipeline for Purple Clone AI automation and agentic workflow micro-services.",
+  "name": "Purple Clone AI Showcase & Lead Portal",
+  "description": "Official showcase gallery and enterprise lead pipeline for Purple Clone AI automation and agentic workflow micro-services.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -1,21 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Lock } from "lucide-react";
 
 interface LoginGateProps {
   onSuccess: () => void;
 }
 
+interface LoginConfig {
+  title: string;
+  description: string;
+  buttonText: string;
+  placeholder: string;
+}
+
+const defaultConfig: LoginConfig = {
+  title: "Login",
+  description: "Enter your login passcode to access pipeline leads, analytics, and showcase configuration.",
+  buttonText: "Unlock Portal",
+  placeholder: "Enter passcode"
+};
+
 export function LoginGate({ onSuccess }: LoginGateProps) {
   const [passcode, setPasscode] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [config, setConfig] = useState<LoginConfig>(defaultConfig);
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetch("/api/login-config")
+      .then((res) => res.ok ? res.json() : Promise.reject())
+      .then((data) => {
+        setConfig({
+          title: data.title || defaultConfig.title,
+          description: data.description || defaultConfig.description,
+          buttonText: data.buttonText || defaultConfig.buttonText,
+          placeholder: data.placeholder || defaultConfig.placeholder
+        });
+      })
+      .catch(() => {
+        setConfig(defaultConfig);
+      });
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === "@genticpurplpe") {
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ passcode }),
+      });
+
+      if (!response.ok) {
+        setLoginError("Invalid passcode.");
+        return;
+      }
+
       setLoginError("");
       onSuccess();
-    } else {
-      setLoginError("Invalid login passcode. Try using '@genticpurplpe'.");
+    } catch (err) {
+      setLoginError("Unable to verify passcode. Please try again.");
     }
   };
 
@@ -25,9 +70,9 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
         <div className="w-12 h-12 bg-yellow-300 text-slate-900 border-2 border-slate-900 flex items-center justify-center mx-auto mb-4 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
           <Lock className="w-5 h-5 stroke-[2.5]" />
         </div>
-        <h3 className="text-2xl font-black font-display text-slate-900 uppercase tracking-tight">Login</h3>
+        <h3 className="text-2xl font-black font-display text-slate-900 uppercase tracking-tight">{config.title}</h3>
         <p className="text-xs text-slate-500 mt-2 font-medium">
-          Enter your login passcode to access pipeline leads, analytics, and showcase configuration.
+          {config.description}
         </p>
       </div>
 
@@ -47,7 +92,7 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
             required
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
-            placeholder="e.g. @genticpurplpe"
+            placeholder={config.placeholder}
             className="w-full px-4 py-2.5 text-sm bg-slate-50 border-2 border-slate-900 focus:bg-white focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all font-mono font-bold"
           />
         </div>
@@ -56,7 +101,7 @@ export function LoginGate({ onSuccess }: LoginGateProps) {
           type="submit"
           className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-wider transition-all shadow-[3px_3px_0px_0px_rgba(51,65,85,1)] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(51,65,85,1)]"
         >
-          Unlock Portal
+          {config.buttonText}
         </button>
       </form>
 

@@ -2,7 +2,7 @@
   {
     "id": "cloneagent-support",
     "name": "CloneAgent Support",
-    "description": "An autonomous customer service agent running on Purple Clone's specialized agentic architecture. Resolves client support tickets, schedules live demos, and synchronizes CRM databases in real-time.",
+    "description": "An autonomous customer service agent running on Purple Clone's specialized agentic architecture. Resolves client support tickets, schedules live demos, and synchronizes customer databases in real-time.",
     "category": "AI Agents",
     "priceModel": "SaaS License",
     "price": "$149/mo starter",
@@ -11,7 +11,7 @@
     "logo": "Bot",
     "features": [
       "Autonomous multi-channel support",
-      "Instant CRM database synchronization",
+      "Instant data synchronization",
       "Semantic intent recognition",
       "Graceful handoff to human operators"
     ],

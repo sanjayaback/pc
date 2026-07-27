@@ -80,7 +80,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ app, onClose, onSubmitSucces
             </div>
             <h3 className="text-2xl font-black text-slate-900 font-display uppercase tracking-tight">Inquiry Logged!</h3>
             <p className="text-sm text-slate-600 mt-2 max-w-xs mx-auto font-medium">
-              We have successfully registered your interest in our developer pipeline and will reply within 24 hours.
+              We have successfully registered your interest in our lead pipeline and will reply within 24 hours.
             </p>
           </div>
         ) : (

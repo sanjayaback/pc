@@ -55,7 +55,7 @@ export const AboutUs: React.FC = () => {
             <h3 className="text-xl font-black text-slate-900 font-display uppercase tracking-tight">Workflow Automation</h3>
             <p className="text-xs text-slate-500 font-mono uppercase tracking-wider mt-1 mb-3">Deterministic Pipelines</p>
             <p className="text-sm text-slate-700 font-medium leading-relaxed">
-              Eliminate glue-code and flaky API integrations. We architect self-healing data synchronization loops between your core CRM, databases, proprietary webhooks, and third-party SaaS pipelines.
+              Eliminate glue-code and flaky API integrations. We architect self-healing data synchronization loops between your core systems, databases, proprietary webhooks, and third-party SaaS pipelines.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-1.5 text-xs font-mono font-black text-indigo-600 uppercase">
@@ -127,7 +127,7 @@ export const AboutUs: React.FC = () => {
               <div>
                 <h4 className="text-base font-black text-slate-900">Transparent Pricing & Lifecycles</h4>
                 <p className="text-xs text-slate-600 font-medium mt-1 leading-relaxed">
-                  From freemium sandbox integrations to heavy full-enterprise white labels, track operational costs, limits, and live metrics within our developer pipeline portal.
+                  From freemium sandbox integrations to heavy full-enterprise white labels, track operational costs, limits, and live metrics within our pipeline portal.
                 </p>
               </div>
             </div>
